@@ -2,13 +2,8 @@
 
 /** including PHPMailer downloaded from internet */
 use PHPMailer\PHPMailer\PHPMailer;
-require "PHPMailer/PHPMailer.php";
-require "PHPMailer/Exception.php";
-
-if ($_SERVER['REQUEST_METHOD'] != 'POST') {
-    header('Location: index.php');
-    exit();
-}
+require "PHPMailer.php";
+require "Exception.php";
 
 
 /** we need to verify all information we have received directly on PayPal
@@ -60,8 +55,8 @@ if ($response == "VERIFIED") {
      * added phpMailer in this project folder
      * set --> use PHPMailer at the beggining of this program
      */
-    if ($item == "wordpressPlugin" && $currency == "USD" && $paymentStatus == "Completed" && $price == 100) {
 
+        if ($paymentStatus == "Completed") {
         /** creating a new object */
         $mail = new PHPMailer();
 
@@ -88,7 +83,8 @@ if ($response == "VERIFIED") {
 			";
 
         $mail->send();
-    }
+
+        }
 }
 
 ?>
